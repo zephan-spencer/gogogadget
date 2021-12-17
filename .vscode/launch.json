@@ -1,7 +1,7 @@
 {
     "configurations": [
         {
-            "args":["--path", "/home/he-man/gem5-SALAM/mobilenetv2_.35", "--inst", "mul"],
+            "args":["--path", "/home/he-man/gem5-SALAM/mobilenetv2_.35", "--inst", "mul", "--type", "inst"],
             "name": "mul.35",
             "type": "python",
             "request": "launch",
@@ -9,7 +9,7 @@
             "console": "integratedTerminal"
         },
         {
-            "args":["--path", "/home/he-man/gem5-SALAM/mobilenetv2_.75", "--inst", "mul"],
+            "args":["--path", "/home/he-man/gem5-SALAM/mobilenetv2_.75", "--inst", "mul", "--type", "inst"],
             "name": "mul.75",
             "type": "python",
             "request": "launch",
@@ -17,7 +17,7 @@
             "console": "integratedTerminal"
         },
         {
-            "args":["--path", "/home/he-man/gem5-SALAM/mobilenetv2_1", "--inst", "mul"],
+            "args":["--path", "/home/he-man/gem5-SALAM/mobilenetv2_1", "--inst", "mul", "--type", "inst"],
             "name": "mul-1",
             "type": "python",
             "request": "launch",
@@ -25,7 +25,7 @@
             "console": "integratedTerminal"
         },
         {
-            "args":["--path", "/home/he-man/gem5-SALAM/mobilenetv2_.35", "--inst", "load"],
+            "args":["--path", "/home/he-man/gem5-SALAM/mobilenetv2_.35", "--inst", "load", "--type", "inst"],
             "name": "load.35",
             "type": "python",
             "request": "launch",
@@ -33,7 +33,7 @@
             "console": "integratedTerminal"
         },
         {
-            "args":["--path", "/home/he-man/gem5-SALAM/mobilenetv2_.75", "--inst", "load"],
+            "args":["--path", "/home/he-man/gem5-SALAM/mobilenetv2_.75", "--inst", "load", "--type", "inst"],
             "name": "load.75",
             "type": "python",
             "request": "launch",
@@ -41,8 +41,32 @@
             "console": "integratedTerminal"
         },
         {
-            "args":["--path", "/home/he-man/gem5-SALAM/mobilenetv2_1", "--inst", "load"],
+            "args":["--path", "/home/he-man/gem5-SALAM/mobilenetv2_1", "--inst", "load", "--type", "inst"],
             "name": "load-1",
+            "type": "python",
+            "request": "launch",
+            "program": "parseJoshStuff.py",
+            "console": "integratedTerminal"
+        },
+        {
+            "args":["--path", "/home/he-man/gem5-SALAM/mobilenetv2_.35", "--type", "top", "--outName", "mobilenet35.csv"],
+            "name": "top.35",
+            "type": "python",
+            "request": "launch",
+            "program": "parseJoshStuff.py",
+            "console": "integratedTerminal"
+        },
+        {
+            "args":["--path", "/home/he-man/gem5-SALAM/mobilenetv2_.75", "--type", "top", "--outName", "mobilenet75.csv"],
+            "name": "top.75",
+            "type": "python",
+            "request": "launch",
+            "program": "parseJoshStuff.py",
+            "console": "integratedTerminal"
+        },
+        {
+            "args":["--path", "/home/he-man/gem5-SALAM/mobilenetv2_1", "--type", "top", "--outName", "mobilenet1.csv"],
+            "name": "top-1",
             "type": "python",
             "request": "launch",
             "program": "parseJoshStuff.py",

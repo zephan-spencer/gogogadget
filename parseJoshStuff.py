@@ -1,12 +1,15 @@
 # A tool for parsing the inner workings of Josh Slycord's mind
 # Import needed packages
 import argparse
+import csv
 from parser import *
 
 parser = argparse.ArgumentParser(description="Gimmie Those R/W Counts")
 
 parser.add_argument('--path', help="Desired output file", required=True)
-parser.add_argument('--inst', help="Instruction to count", required=True)
+parser.add_argument('--type', help="What you're looking for", required=False)
+parser.add_argument('--inst', help="Instruction to count", required=False)
+parser.add_argument('--outName', help="Output File Name", required=False)
 
 args=parser.parse_args()
 
@@ -14,21 +17,36 @@ outputFile = open(args.path, 'r')
 
 lines = outputFile.readlines()
 
-wantedInst = "Instruction: " + args.inst + "\n"
+if args.type == "inst":
+    wantedInst = "Instruction: " + args.inst + "\n"
+    totalCount = 0
+    accIgnoreList = ["top"]
+    ignoring = False
 
-totalCount = 0
-accIgnoreList = ["top"]
-ignoring = False
-
-for index, line in enumerate(lines):
-    if "system." in line:
-        for acc in accIgnoreList:
-            if acc in line:
-                ignoring = True
-            else:
-                ignoring = False
-    if not ignoring:
-        if args.inst in line:
-            if wantedInst == line:
-                totalCount += [int(num) for num in lines[index+3].split() if num.isdigit()][0]
-print("Total Count of " + args.inst + ": " + str(totalCount))
+    for index, line in enumerate(lines):
+        if "system." in line:
+            for acc in accIgnoreList:
+                if acc in line:
+                    ignoring = True
+                else:
+                    ignoring = False
+        if not ignoring:
+            if args.inst in line:
+                if wantedInst == line:
+                    totalCount += [int(num) for num in lines[index+3].split() if num.isdigit()][0]
+    print("Total Count of " + args.inst + ": " + str(totalCount))
+if args.type == "top":
+    accHeader = []
+    accList = []
+    for index, line in enumerate(lines):
+        if "top.llvm_interface" in line:
+            for accLine in lines[index:]:
+                if "Runtime" in accLine:
+                    accHeader.append(line)
+                    accList.append([int(num) for num in accLine.split() if num.isdigit()][0])
+                    break
+    with open(args.outName, 'w') as f:
+        write = csv.writer(f)
+        write.writerow(accHeader)
+        write.writerow(accList)
+    print("All done")
